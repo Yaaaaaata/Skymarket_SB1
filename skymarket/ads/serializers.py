@@ -1,18 +1,24 @@
 from rest_framework import serializers
+from .models import Ad, Comment
 
-
-# TODO Сериалайзеры. Предлагаем Вам такую структуру, однако вы вправе использовать свою
 
 class CommentSerializer(serializers.ModelSerializer):
-    # TODO сериалайзер для модели
-    pass
+    class Meta:
+        model = Comment
+        fields = ['text', 'author', 'ad', 'created_at']
 
 
 class AdSerializer(serializers.ModelSerializer):
-    # TODO сериалайзер для модели
-    pass
+    comments = CommentSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Ad
+        fields = ['title', 'price', 'description', 'author', 'created_at', 'comments']
 
 
 class AdDetailSerializer(serializers.ModelSerializer):
-    # TODO сериалайзер для модели
-    pass
+    comments = CommentSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Ad
+        fields = ['title', 'price', 'description', 'author', 'created_at', 'comments']
