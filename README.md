@@ -20,9 +20,9 @@ Frontend-часть уже готова и находится по адресу 
 
 ***Старт***
 
-Win -> `python manage.py`
+Win -> `python skymarket/manage.py`
 
-Linux -> `python3 manage.py`
+Linux -> `python3 skymarket/manage.py`
 
 ***ENV***
 
@@ -36,6 +36,11 @@ Linux -> `python3 manage.py`
 `POSTGRES_PORT`
 
 `SECRET_KEY`
+
+`EMAIL_HOST`
+`EMAIL_HOST_USER`
+`EMAIL_HOST_PASSWORD`
+`EMAIL_PORT`
 
  Файл `.env` должен находиться в корне проекта.
 

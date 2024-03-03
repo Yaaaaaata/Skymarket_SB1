@@ -6,11 +6,11 @@ services:
     image: postgres
     container_name: db
     env_file:
-      - .env
+      - .env.example
     environment:
-      - PGDATA=/var/lib/postgresql/data/pgdata
+      - PGDATA=/var/lib/postgresql/data/pg_data
     volumes:
-      - pg_data:/var/lib/postgresql/data/pgdata
+      - pg_data:/var/lib/postgresql/data/pg_data
     ports:
       - '5432:5432'
     healthcheck:
@@ -23,9 +23,9 @@ services:
     container_name: app
     build: .
     tty: true
-    command: bash -c "python manage.py makemigrations
-      && python manage.py migrate
-      && python manage.py runserver 0.0.0.0:8000"
+    command: bash -c "python skymarket/manage.py makemigrations
+      && python skymarket/manage.py migrate
+      && python skymarket/manage.py runserver 0.0.0.0:8000"
     ports:
       - "8000:8000"
     volumes:
@@ -35,4 +35,4 @@ services:
         condition: service_healthy
 
 volumes:
-  postgres_data:
+  pg_data:
