@@ -2,6 +2,8 @@ from django.contrib.auth.models import (
     BaseUserManager
 )
 
+from skymarket.users.models import UserRoles
+
 
 # TODO здесь должен быть менеджер для модели Юзера.
 # TODO Поищите эту информацию в рекомендациях к проекту
@@ -18,7 +20,7 @@ class UserManager(BaseUserManager):
             first_name=first_name,
             last_name=last_name,
             phone=phone,
-            role="user"
+            role=UserRoles.USER
         )
         user.is_active = True
         user.set_password(password)
@@ -38,7 +40,7 @@ class UserManager(BaseUserManager):
             last_name=last_name,
             phone=phone,
             password=password,
-            role="admin"
+            role=UserRoles.ADMIN
         )
 
         user.save(using=self._db)
