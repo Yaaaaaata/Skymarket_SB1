@@ -2,17 +2,14 @@ from django.contrib.auth.models import (
     BaseUserManager
 )
 
-from skymarket.users.models import UserRoles
 
-
-# TODO здесь должен быть менеджер для модели Юзера.
-# TODO Поищите эту информацию в рекомендациях к проекту
 class UserManager(BaseUserManager):
     """
     функция создания пользователя — в нее мы передаем обязательные поля
     """
 
     def create_user(self, email, first_name, last_name, phone, password=None):
+        from .models import UserRoles
         if not email:
             raise ValueError('Users must have an email address')
         user = self.model(
@@ -33,6 +30,7 @@ class UserManager(BaseUserManager):
         функция для создания суперпользователя — с ее помощью мы создаем админинстратора
         это можно сделать с помощью команды createsuperuser
         """
+        from .models import UserRoles
 
         user = self.create_user(
             email,
@@ -45,3 +43,4 @@ class UserManager(BaseUserManager):
 
         user.save(using=self._db)
         return user
+
