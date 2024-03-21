@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.db import models
+from .managers import UserManager
 
 
 class UserRoles:
@@ -19,6 +20,8 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name', 'last_name', 'phone']
+
+    objects = UserManager()
 
     @property
     def is_admin(self):
@@ -41,8 +44,3 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def has_module_perms(self, app_label):
         return self.is_admin
-
-    @property
-    def objects(self):
-        from .managers import UserManager
-        return UserManager()
